@@ -4,12 +4,11 @@ This script will demonize your bot with systemd.
 You must use it as Super User (sudo).
 
 Copies project to /usr/local/bin/{cwd_name}
-Installs packages from requirements.txt (if exists)
-You can specify own dirName and mainScriptName with 2 arguments
+You can specify own dirname and main_script_name with 2 arguments
 
 By default:
- dirName - $cwdName
- mainScriptName - server.py
+ dirname - $cwd_name
+ main_script_name - server.py
 """
 
 import os
