@@ -1,2 +1,2 @@
 # MixIn
-Various useful functions and classes
+Various useful functions, classes and modules
