@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This script will demonize your bot with systemd.
+This script will daemonize your bot with systemd.
 You must use it as Super User (sudo).
 
 Copies project to /usr/local/bin/{cwd_name}
