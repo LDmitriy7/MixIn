@@ -42,6 +42,12 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 """
+
+if os.path.exists('requirements.txt'):
+    os.system('pip3 install -r requirements.txt')
+else:
+    warnings.warn("Can't find requirements.txt")
+
 os.system(f'cp -r . {NEW_PROJECT_DIR}')
 os.system(f'rm {NEW_PROJECT_DIR}/{__file__}')
 os.system(f'echo "{UNIT_TEXT}" > {UNIT_PATH}')
