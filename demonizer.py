@@ -13,6 +13,7 @@ By default:
 
 import os
 import sys
+import warnings
 
 try:
     BOT_NAME = sys.argv[1]
