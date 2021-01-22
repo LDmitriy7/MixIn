@@ -273,9 +273,6 @@ PACKAGES = {
     'utils': [],
 }
 
-os.mkdir('test')
-os.chdir('test')
-
 create_files(PACKAGES)
 
 REQUIREMENTS = ['aiogram']
