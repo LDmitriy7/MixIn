@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 server_py = ['server.py', """\
 \"""Main script, starts bot in long-polling mode.\"""
@@ -7,12 +8,12 @@ from aiogram import Dispatcher
 
 async def on_startup(dp: Dispatcher):
     import logging
-    
+
     import middlewares
     import handlers
-    
+
     logging.basicConfig(level=30)
-    
+
     dp.throttling_rate_limit = 3
     dp.no_throttle_error = True
 
@@ -272,19 +273,29 @@ PACKAGES = {
     'middlewares': [mw_init_py, mw_main_py],
     'utils': [],
 }
+SITE_PACKAGES = ['aiogram', 'motor', 'pymongo']
 
 create_files(PACKAGES)
 
-REQUIREMENTS = ['aiogram']
-
-# make and activate virtual env, install packages, make requirements.txt
+# make virtual env, install packages, make requirements.txt
 os.system('python3 -m venv venv')
-# os.system('source venv/bin/activate')
-#
-# for package in REQUIREMENTS:
-#     os.system(f'pip3 install {package}')
-#
-# os.system('pip3 freeze > requirements.txt')
+
+site_packages_list = [f"pip3 install {p};" for p in SITE_PACKAGES]
+site_packages_text = '\n'.join(site_packages_list)
+
+subscript_name = 'installer.sh'
+subscript_text = f"""\
+source venv/bin/activate;
+{site_packages_text}
+pip3 freeze > requirements.txt
+"""
+
+with open(subscript_name, 'w') as fp:
+    fp.write(subscript_text)
+
+subprocess.Popen('python3 -m venv venv', shell=True, stdout=True).wait()
+subprocess.Popen(f'/bin/bash {subscript_name}', shell=True, stdout=True).wait()
+os.remove(subscript_name)
 
 # make git-repository
 os.system('git init')
