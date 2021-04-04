@@ -44,15 +44,15 @@ Restart=on-failure
 WantedBy=multi-user.target
 """
 
-if os.path.exists('requirements.txt'):
-    os.system('pip3 install -r requirements.txt')
-else:
-    warnings.warn("Can't find requirements.txt")
+# if os.path.exists('requirements.txt'):
+#     os.system('pip3 install -r requirements.txt')
+# else:
+#     warnings.warn("Can't find requirements.txt")
 
 os.system(f'cp -r . {NEW_PROJECT_DIR}')
 os.system(f'rm {NEW_PROJECT_DIR}/{__file__}')
 os.system(f'echo "{UNIT_TEXT}" > {UNIT_PATH}')
 os.system('systemctl daemon-reload')
 os.system(f'systemctl enable {BOT_NAME}.service')
-os.system(f'systemctl start {BOT_NAME}.service')
+os.system(f'systemctl restart {BOT_NAME}.service')
 os.system(f'systemctl status {BOT_NAME}')
