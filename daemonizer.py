@@ -3,7 +3,7 @@
 This script will daemonize your bot with systemd.
 You must use it as Super User (sudo).
 
-Copies project to /usr/local/bin/{cwd_name}
+Copies project to /usr/local/bin/{dirname}
 You can specify own dirname and main_script_name with 2 arguments
 
 By default:
