@@ -3,12 +3,12 @@
 This script will daemonize your bot with systemd.
 You must use it as Super User (sudo).
 
-Copies project to /usr/local/bin/{dirname}
+Copies project to /usr/local/bin/{bot_name}
 You can specify own dirname and main_script_name with 2 arguments
 
 By default:
- dirname - $cwd_name
- main_script_name - server.py
+ bot_name - $cwd_name
+ main_script_name - app.py
 """
 
 import os
@@ -23,7 +23,7 @@ except IndexError:
 try:
     MAIN_SCRIPT_NAME = sys.argv[2]
 except IndexError:
-    MAIN_SCRIPT_NAME = 'server.py'
+    MAIN_SCRIPT_NAME = 'app.py'
 
 UNIT_PATH = f'/etc/systemd/system/{BOT_NAME}.service'
 NEW_PROJECT_DIR = f'/usr/local/bin/{BOT_NAME}'
@@ -44,10 +44,10 @@ Restart=on-failure
 WantedBy=multi-user.target
 """
 
-# if os.path.exists('requirements.txt'):
-#     os.system('pip3 install -r requirements.txt')
-# else:
-#     warnings.warn("Can't find requirements.txt")
+if os.path.exists('requirements.txt'):
+    os.system('pip3 install -r requirements.txt')
+else:
+    warnings.warn("Can't find requirements.txt")
 
 os.system(f'cp -r . {NEW_PROJECT_DIR}')
 os.system(f'rm {NEW_PROJECT_DIR}/{__file__}')
